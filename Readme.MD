@@ -25,17 +25,17 @@ This makes the project useful for marketing analysts, retail managers, and data 
 
 ## 🚀 Main features
 
-- 📤 File upload support for customer CSVs.
-- 🧩 Auto-matching of common column names and safe default filling for missing fields.
-- ✍️ Manual single-customer entry for users without a ready CSV.
-- 📄 Template CSV download for easy data preparation.
-- 🧠 Automatic preprocessing and feature engineering.
-- 🧩 Agglomerative cluster prediction using saved model artifacts.
-- 🗂️ Compact prediction table plus a full-data tab.
-- 📊 Cluster distribution chart.
-- 📌 Quick summary table for each cluster.
-- ⬇️ Download button for the scored dataset.
-- ⚡ Cached model loading for faster app startup.
+- File upload support for customer CSVs.
+- Auto-matching of common column names and safe default filling for missing fields.
+- Manual single-customer entry for users without a ready CSV.
+- Template CSV download for easy data preparation.
+- Automatic preprocessing and feature engineering.
+- Agglomerative cluster prediction using saved model artifacts.
+- Compact prediction table plus a full-data tab.
+- Cluster distribution chart.
+- Quick summary table for each cluster.
+- Download button for the scored dataset.
+- Cached model loading for faster app startup.
 
 ## 🔄 How it works
 
