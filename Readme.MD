@@ -4,8 +4,13 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![ML](https://img.shields.io/badge/Machine%20Learning-Agglomerative%20Clustering-F7931E)](#how-it-works)
 [![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
+[![Live App](https://img.shields.io/badge/Live%20App-Open%20Demo-00C853?logo=streamlit&logoColor=white)](https://smartcart-clustering.streamlit.app/)
 
 SmartCart Clustering System is a Streamlit app for customer segmentation. It can take a customer CSV, auto-match or fill missing fields, or let a user enter a single customer manually. The app applies the same preprocessing used during training and assigns each record to a behavioral cluster. The deployed prediction flow uses agglomerative clustering because it gives the stronger segmentation result in this project, while K-Means is kept as a baseline comparison.
+
+## 🌍 Live Demo
+
+Open the deployed app here: [https://smartcart-clustering.streamlit.app/](https://smartcart-clustering.streamlit.app/)
 
 ## ✨ What the app does
 
