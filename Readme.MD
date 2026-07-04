@@ -1,148 +1,55 @@
-# 🛒 SmartCart Clustering System
+# SmartCart Clustering System
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![ML](https://img.shields.io/badge/Machine%20Learning-K--Means-F7931E)](#-why-k-means)
-[![Status](https://img.shields.io/badge/Project-Scaffold-orange)](#-current-project-status)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![ML](https://img.shields.io/badge/Machine%20Learning-K--Means-F7931E)](#how-it-works)
 [![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
 
-An end-to-end machine learning project concept for customer/cart behavior segmentation using clustering. The goal is to group similar shopping patterns so that recommendations, promotions, and inventory decisions can be personalized and data-driven.
+SmartCart Clustering System is a Streamlit app for customer segmentation. It takes a customer CSV, applies the same preprocessing used during training, and assigns each record to a behavioral cluster. The goal is to help retail teams understand customer groups for targeting, retention, and campaign planning.
 
-## 📌 Current Project Status
+## What the app does
 
-This repository is currently in the **initial scaffold stage**:
+When a user opens the website, they can:
 
-- [app.py](app.py): present but empty
-- [requirements.txt](requirements.txt): present but empty
-- [Readme.MD](Readme.MD): documentation file (this file)
-- [data/](data/): empty
-- [models/](models/): empty
-- [notebooks/](notebooks/): empty
-- [images/](images/): empty
+1. Upload a customer CSV.
+2. See customer-level cluster labels.
+3. Review cluster counts and a quick cluster profile.
+4. Download the clustered output as a CSV.
 
-This README documents the intended architecture and methodology for the SmartCart clustering system and serves as the implementation blueprint.
+This makes the project useful for marketing analysts, retail managers, and data teams who want a simple segmentation tool instead of working directly in notebooks.
 
-## 🎯 Problem This Project Solves
+## Main features
 
-Retail and e-commerce platforms often treat all customers similarly, which can lead to:
+- File upload support for customer CSVs.
+- Automatic preprocessing and feature engineering.
+- Cluster prediction using saved model artifacts.
+- Compact prediction table plus a full-data tab.
+- Cluster distribution chart.
+- Quick summary table for each cluster.
+- Download button for the scored dataset.
+- Cached model loading for faster app startup.
 
-- low conversion rates from generic campaigns,
-- weak product recommendations,
-- poor inventory planning,
-- missed opportunities for retention.
+## How it works
 
-The SmartCart Clustering System addresses this by discovering **natural customer segments** from behavior data (purchase frequency, basket value, recency, category preferences, etc.). These segments can be used for:
+The trained pipeline in [notebooks/SmartCartClustering.ipynb](notebooks/SmartCartClustering.ipynb) uses the following flow:
 
-- targeted marketing campaigns,
-- dynamic recommendations,
-- customer lifecycle strategies,
-- pricing and promotion optimization.
+1. Clean missing values.
+2. Engineer features like age, total spending, total children, and customer tenure.
+3. Encode categorical fields such as education and living situation.
+4. Scale features.
+5. Reduce dimensionality with PCA.
+6. Predict clusters with K-Means.
 
-## 🗂️ Dataset Description
+The Streamlit app in [app.py](app.py) loads the saved artifacts from [models/](models/) and reuses that exact logic for inference.
 
-The project is designed for a transaction-level retail dataset, typically containing:
+## Typical users
 
-- customer identifier,
-- order date/time,
-- order or cart value,
-- quantity of items,
-- product/category information,
-- optional demographics or geography.
+- Marketing teams who want customer segments for targeted campaigns.
+- Retail teams who want to identify high-spending or high-engagement groups.
+- Data analysts who need a quick way to profile customers by behavior.
+- Demo users who want to explore clustering results without running notebooks.
 
-### Expected Raw Data Location
-
-- [data/](data/) (for CSV/Parquet/raw extracts)
-
-### Typical Target for Modeling
-
-Customer-level feature table where each row represents one customer and columns represent engineered behavioral metrics.
-
-## 🧹 Data Preprocessing
-
-Recommended preprocessing pipeline:
-
-1. Data quality checks
-2. Handle missing values (drop/impute as appropriate)
-3. Remove duplicate transactions
-4. Parse and normalize datetime fields
-5. Treat extreme outliers (winsorization, clipping, or robust transformations)
-6. Aggregate transaction records to customer-level features
-7. Scale numeric variables (StandardScaler or RobustScaler)
-
-Why scaling matters: K-Means is distance-based, so features with larger numeric ranges can dominate cluster assignment if not normalized.
-
-## 🧠 Feature Engineering
-
-Typical clustering features for SmartCart scenarios include:
-
-- **RFM Features**
-	- Recency: days since last purchase
-	- Frequency: number of orders in a time window
-	- Monetary: total/average spend
-- **Basket Behavior**
-	- average cart size
-	- items per order
-	- discount usage rate
-- **Category Preference**
-	- share of spend by category
-	- diversity of purchased categories
-- **Engagement Patterns**
-	- weekday vs weekend activity
-	- monthly/seasonal purchase patterns
-
-High-quality feature engineering is usually more impactful than algorithm changes in unsupervised segmentation tasks.
-
-## 🤖 Why K-Means Was Chosen
-
-K-Means is an effective baseline for this use case because it is:
-
-- simple and fast for medium-to-large tabular datasets,
-- easy to interpret for business stakeholders,
-- effective when clusters are compact and behavior patterns are separable,
-- widely supported in analytics and MLOps workflows.
-
-K-Means minimizes within-cluster variance:
-
-$$
-\underset{\{C_k\}}{\mathrm{arg\ min}}\sum_{k=1}^{K}\sum_{x_i \in C_k}\left\|x_i-\mu_k\right\|^2
-$$
-
-where $\mu_k$ is the centroid of cluster $C_k$.
-
-## 📐 Selecting the Optimal Number of Clusters
-
-The optimal $K$ should be selected using multiple signals:
-
-1. **Elbow Method**
-2. **Silhouette Score**
-3. **Davies-Bouldin Index**
-4. **Business Interpretability**
-
-Recommended approach:
-
-- search a range (for example, $K=2$ to $K=12$),
-- identify elbow and local silhouette maxima,
-- compare segment stability across random seeds,
-- finalize $K$ based on actionable business meaning.
-
-## 📊 Model Evaluation
-
-Because clustering is unsupervised, evaluation combines statistical and business validation:
-
-- **Internal Metrics**
-	- Silhouette Score (higher is better)
-	- Davies-Bouldin Index (lower is better)
-	- Calinski-Harabasz Score (higher is better)
-- **Cluster Diagnostics**
-	- cluster size distribution,
-	- centroid profiling,
-	- feature importance by centroid deviation.
-- **Business Validation**
-	- whether segments map to clear behavioral personas,
-	- performance uplift in campaigns/recommendations by segment.
-
-## 🗃️ Folder Structure
-
-Current repository structure:
+## Project structure
 
 ```text
 SmartCart Clustering System/
@@ -150,85 +57,116 @@ SmartCart Clustering System/
 ├── Readme.MD
 ├── requirements.txt
 ├── data/
-├── images/
+│   └── smartcart_customers.csv
 ├── models/
-└── notebooks/
+│   ├── aggl_model.pkl
+│   ├── encoder.pkl
+│   ├── kmeans_model.pkl
+│   ├── pca.pkl
+│   └── scaler.pkl
+├── notebooks/
+│   └── SmartCartClustering.ipynb
+└── images/
 ```
 
-Suggested usage of folders:
+## Files that matter
 
-- [data/](data/): raw and processed datasets
-- [notebooks/](notebooks/): EDA, experiments, and prototyping
-- [models/](models/): serialized clustering models and scalers
-- [images/](images/): plots (elbow curve, silhouette chart, cluster profiles)
+- [app.py](app.py): Streamlit dashboard and inference logic.
+- [notebooks/SmartCartClustering.ipynb](notebooks/SmartCartClustering.ipynb): model training, feature engineering, and artifact export.
+- [models/](models/): serialized scaler, encoder, PCA, and clustering model.
+- [data/smartcart_customers.csv](data/smartcart_customers.csv): sample dataset for testing.
+- [requirements.txt](requirements.txt): pinned Python dependencies.
 
-## ⚙️ Installation
+## Local setup
 
-1. Clone the repository
-
-```bash
-git clone <your-repo-url>
-cd "SmartCart Clustering System"
-```
-
-2. Create and activate a virtual environment
+1. Create a virtual environment.
 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
 ```
 
-3. Install dependencies
+2. Install dependencies.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-> Note: [requirements.txt](requirements.txt) is currently empty and should be populated during implementation.
-
-## ▶️ Running the Project
-
-Planned execution flow:
+3. Start the app.
 
 ```bash
-python app.py
+streamlit run app.py
 ```
 
-Current state:
+## Input format
 
-- [app.py](app.py) is empty, so there is no executable pipeline yet.
-- Recommended next step: implement data loading, preprocessing, feature generation, K selection, training, and artifact saving in [app.py](app.py) or inside [notebooks/](notebooks/).
+The uploaded CSV should contain the same columns used by the training notebook, including:
 
-## 🧰 Technologies Used
+- `ID`
+- `Year_Birth`
+- `Education`
+- `Marital_Status`
+- `Income`
+- `Kidhome`
+- `Teenhome`
+- `Dt_Customer`
+- `Recency`
+- `MntWines`
+- `MntFruits`
+- `MntMeatProducts`
+- `MntFishProducts`
+- `MntSweetProducts`
+- `MntGoldProds`
+- `NumDealsPurchases`
+- `NumWebPurchases`
+- `NumCatalogPurchases`
+- `NumStorePurchases`
+- `NumWebVisitsMonth`
+- `Complain`
+- `Response`
 
-Planned technology stack:
+## Output
 
-- Python
-- Pandas / NumPy
-- Scikit-learn
-- Matplotlib / Seaborn
-- Jupyter Notebook
+The app returns:
 
-Optional extensions:
+- the original customer rows,
+- a predicted `Cluster` column,
+- a compact prediction view,
+- a cluster count chart,
+- a quick profile table,
+- a downloadable clustered CSV.
 
-- Plotly for interactive analysis
-- Streamlit/FastAPI for serving cluster insights
+## Model artifacts
 
-## 🚀 Future Improvements
+The app expects these files in [models/](models/):
 
-- Add complete training pipeline in [app.py](app.py)
-- Add reproducible notebook workflow in [notebooks/](notebooks/)
-- Add dependency lock and environment configuration
-- Save versioned model artifacts to [models/](models/)
-- Add visualization outputs to [images/](images/)
-- Compare K-Means with GMM, DBSCAN, and hierarchical clustering
-- Add cluster drift monitoring for periodic retraining
-- Build a lightweight dashboard/API for segment exploration
+- `kmeans_model.pkl`
+- `scaler.pkl`
+- `encoder.pkl`
+- `pca.pkl`
+- `feature_columns.pkl`
 
-## 🤝 Contribution
+If you retrain the notebook, regenerate these artifacts before redeploying the app.
 
-Contributions are welcome. Open an issue describing the improvement, then submit a pull request with clear implementation notes.
+## Why K-Means
 
-## 📄 License
+K-Means is a good fit because it is simple, fast, and easy to explain to non-technical users. It works well as a baseline for customer segmentation when the goal is to create useful behavior groups quickly.
 
-Add a LICENSE file (for example MIT) and update the badge/link above accordingly.
+## Deployment notes
+
+- Use Streamlit Cloud, Azure App Service, or any host that supports Python apps.
+- Make sure the `models/` folder is included in the deployed source.
+- Keep [requirements.txt](requirements.txt) aligned with the artifact runtime.
+- Re-run the notebook if you change feature engineering logic.
+
+## Future improvements
+
+- Add a manual input form for single-customer scoring.
+- Add cluster descriptions such as "high value" or "low engagement".
+- Add more charts for spend and behavior comparison by cluster.
+- Add a model retraining button or scheduled refresh pipeline.
+- Add authentication if the app will be used internally.
+
+## License
+
+MIT or another license of your choice. Add a `LICENSE` file if you plan to publish the repository.
