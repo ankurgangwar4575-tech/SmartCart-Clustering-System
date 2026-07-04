@@ -198,7 +198,7 @@ if uploaded_file is None:
 	sample_path = ROOT / "data" / "smartcart_customers.csv"
 	if sample_path.exists():
 		sample_df = pd.read_csv(sample_path)
-		st.dataframe(sample_df.head(), use_container_width=True)
+		st.dataframe(sample_df.head(), width="stretch")
 	st.stop()
 
 
@@ -242,11 +242,11 @@ with left:
 
 	with tab1:
 		st.subheader("Cluster assignments")
-		st.dataframe(output_df[display_columns], use_container_width=True, hide_index=True, height=360)
+		st.dataframe(output_df[display_columns], width="stretch", hide_index=True, height=360)
 
 	with tab2:
 		st.subheader("Full uploaded dataset")
-		st.dataframe(output_df, use_container_width=True, hide_index=True, height=360)
+		st.dataframe(output_df, width="stretch", hide_index=True, height=360)
 
 	csv_data = output_df.to_csv(index=False).encode("utf-8")
 	st.download_button(
@@ -261,5 +261,5 @@ with right:
 	st.bar_chart(cluster_counts)
 
 	st.subheader("Quick profile")
-	st.dataframe(summary_table, use_container_width=True, hide_index=False)
+	st.dataframe(summary_table, width="stretch", hide_index=False)
 
