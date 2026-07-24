@@ -172,16 +172,16 @@ K-Means is still useful as a baseline because it is simple, fast, and easy to ex
 
 Quick comparison:
 
-- K-Means: fast baseline, but it assumes spherical clusters and can miss more complex structure.
-- Agglomerative clustering: better at capturing nested structure and producing more meaningful customer groups in this project.
-- Deployment choice: agglomerative clustering is used in the app, with nearest-centroid assignment for incoming customer rows.
+- K-Means: fast baseline, but it assumes spherical clusters and can miss more complex structure
+- Agglomerative clustering: better at capturing nested structure and producing more meaningful customer groups in this project
+- Deployment choice: agglomerative clustering is used in the app, with nearest-centroid assignment for incoming customer rows
 
 ## 🌐 Deployment notes
 
 - Use Streamlit Cloud, Azure App Service, or any host that supports Python apps.
-- Make sure the `models/` folder is included in the deployed source.
+- Make sure the `models/` folder is included in the deployed source
 - Keep [requirements.txt](requirements.txt) aligned with the artifact runtime.
-- Include `agglomerative_centroids.pkl` with the other model files.
+- Include `agglomerative_centroids.pkl` with the other model files
 - Re-run the notebook if you change feature engineering logic.
 - Mention the manual-entry and template tabs in your demo so users know the app is not limited to exact training files.
 
