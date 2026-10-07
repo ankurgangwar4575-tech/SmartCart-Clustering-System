@@ -149,7 +149,7 @@ The app returns:
 - a compact prediction view,
 - a cluster count chart,
 - a quick profile table,
-- a downloadable clustered CSV.
+- a downloadable clustered CSV
 
 ## 🧰 Model artifacts
 
@@ -162,13 +162,13 @@ The app expects these files in [models/](models/):
 - `pca.pkl`
 - `feature_columns.pkl`
 
-If you retrain the notebook, regenerate these artifacts before redeploying the app. The centroid file is required because agglomerative clustering does not provide a native `predict` method for new rows.
+If you retrain the notebook, regenerate these artifacts before redeploying the app. The centroid file is required because agglomerative clustering does not provide a native `predict` method for new rows
 
-If your data uses different column names, the app will try to map them automatically and fill missing values with safe defaults.
+If your data uses different column names, the app will try to map them automatically and fill missing values with safe defaults
 
 ## 🤖 K-Means vs Agglomerative
 
-K-Means is still useful as a baseline because it is simple, fast, and easy to explain to non-technical users. In this project, however, agglomerative clustering is the better choice for predictions because it produced the stronger segmentation result and more useful clusters.
+K-Means is still useful as a baseline because it is simple, fast, and easy to explain to non-technical users. In this project, however, agglomerative clustering is the better choice for predictions because it produced the stronger segmentation result and more useful clusters
 
 Quick comparison:
 
@@ -178,21 +178,21 @@ Quick comparison:
 
 ## 🌐 Deployment notes
 
-- Use Streamlit Cloud, Azure App Service, or any host that supports Python apps.
+- Use Streamlit Cloud, Azure App Service, or any host that supports Python apps
 - Make sure the `models/` folder is included in the deployed source
-- Keep [requirements.txt](requirements.txt) aligned with the artifact runtime.
+- Keep [requirements.txt](requirements.txt) aligned with the artifact runtime
 - Include `agglomerative_centroids.pkl` with the other model files
-- Re-run the notebook if you change feature engineering logic.
-- Mention the manual-entry and template tabs in your demo so users know the app is not limited to exact training files.
+- Re-run the notebook if you change feature engineering logic
+- Mention the manual-entry and template tabs in your demo so users know the app is not limited to exact training files
 
 ## 🔮 Future improvements
 
 - Add a manual input form for single-customer scoring.
-- Add cluster descriptions such as "high value" or "low engagement".
-- Add more charts for spend and behavior comparison by cluster.
-- Add a model retraining button or scheduled refresh pipeline.
-- Add authentication if the app will be used internally.
+- Add cluster descriptions such as "high value" or "low engagement"
+- Add more charts for spend and behavior comparison by cluster
+- Add a model retraining button or scheduled refresh pipeline
+- Add authentication if the app will be used internally
 
 ## 📄 License
 
-MIT or another license of your choice. Add a `LICENSE` file if you plan to publish the repository.
+MIT or another license of your choice. Add a `LICENSE` file if you plan to publish the repository
