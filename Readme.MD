@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
 [![Live App](https://img.shields.io/badge/Live%20App-Open%20Demo-00C853?logo=streamlit&logoColor=white)](https://smartcart-clustering.streamlit.app/)
 
-SmartCart Clustering System is a Streamlit app for customer segmentation. It can take a customer CSV, auto-match or fill missing fields, or let a user enter a single customer manually. The app applies the same preprocessing used during training and assigns each record to a behavioral cluster. The deployed prediction flow uses agglomerative clustering because it gives the stronger segmentation result in this project, while K-Means is kept as a baseline comparison.
+SmartCart Clustering System is a Streamlit app for customer segmentation. It can take a customer CSV, auto-match or fill missing fields, or let a user enter a single customer manually. The app applies the same preprocessing used during training and assigns each record to a behavioral cluster. The deployed prediction flow uses agglomerative clustering because it gives the stronger segmentation result in this project, while K-Means is kept as a baseline comparison
 
 ## 🌍 Live Demo
 
@@ -16,53 +16,53 @@ Open the deployed app here: [https://smartcart-clustering.streamlit.app/](https:
 
 When a user opens the website, they can:
 
-1. Upload a customer CSV.
-2. See customer-level cluster labels.
-3. Review cluster counts and a quick cluster profile.
-4. Download the clustered output as a CSV.
+1. Upload a customer CSV
+2. See customer-level cluster labels
+3. Review cluster counts and a quick cluster profile
+4. Download the clustered output as a CSV
 
-This makes the project useful for marketing analysts, retail managers, and data teams who want a simple segmentation tool instead of working directly in notebooks.
+This makes the project useful for marketing analysts, retail managers, and data teams who want a simple segmentation tool instead of working directly in notebooks
 
 ## 🚀 Main features
 
-- File upload support for customer CSVs.
-- Auto-matching of common column names and safe default filling for missing fields.
-- Manual single-customer entry for users without a ready CSV.
-- Template CSV download for easy data preparation.
-- Automatic preprocessing and feature engineering.
-- Agglomerative cluster prediction using saved model artifacts.
-- Compact prediction table plus a full-data tab.
-- Cluster distribution chart.
-- Quick summary table for each cluster.
-- Download button for the scored dataset.
-- Cached model loading for faster app startup.
+- File upload support for customer CSVs
+- Auto-matching of common column names and safe default filling for missing fields
+- Manual single-customer entry for users without a ready CSV
+- Template CSV download for easy data preparation
+- Automatic preprocessing and feature engineering
+- Agglomerative cluster prediction using saved model artifacts
+- Compact prediction table plus a full-data tab
+- Cluster distribution chart
+- Quick summary table for each cluster
+- Download button for the scored dataset
+- Cached model loading for faster app startup
 
 ## 🔄 How it works
 
 The trained pipeline in [notebooks/SmartCartClustering.ipynb](notebooks/SmartCartClustering.ipynb) uses the following flow:
 
-1. Clean missing values.
-2. Engineer features like age, total spending, total children, and customer tenure.
-3. Encode categorical fields such as education and living situation.
-4. Scale features.
-5. Reduce dimensionality with PCA.
-6. Predict clusters with agglomerative clustering.
-7. Assign new uploads to the nearest trained cluster centroid in PCA space.
+1. Clean missing values
+2. Engineer features like age, total spending, total children, and customer tenure
+3. Encode categorical fields such as education and living situation
+4. Scale features
+5. Reduce dimensionality with PCA
+6. Predict clusters with agglomerative clustering
+7. Assign new uploads to the nearest trained cluster centroid in PCA space
 
-The Streamlit app in [app.py](app.py) loads the saved artifacts from [models/](models/) and reuses that exact logic for inference. K-Means is still available in the repository as a benchmark, but the website uses the agglomerative result for scoring.
+The Streamlit app in [app.py](app.py) loads the saved artifacts from [models/](models/) and reuses that exact logic for inference. K-Means is still available in the repository as a benchmark, but the website uses the agglomerative result for scoring
 
 For usability, the app supports three input modes:
 
-1. Upload any CSV with partial or renamed columns.
-2. Enter one customer manually in the form.
-3. Download a template CSV that already has the expected fields.
+1. Upload any CSV with partial or renamed columns
+2. Enter one customer manually in the form
+3. Download a template CSV that already has the expected fields
 
 ## 👥 Typical users
 
-- Marketing teams who want customer segments for targeted campaigns.
-- Retail teams who want to identify high-spending or high-engagement groups.
-- Data analysts who need a quick way to profile customers by behavior.
-- Demo users who want to explore clustering results without running notebooks.
+- Marketing teams who want customer segments for targeted campaigns
+- Retail teams who want to identify high-spending or high-engagement groups
+- Data analysts who need a quick way to profile customers by behavior
+- Demo users who want to explore clustering results without running notebooks
 
 ## 🗂️ Project structure
 
@@ -87,27 +87,27 @@ SmartCart Clustering System/
 ## 📌 Files that matter
 
 - [app.py](app.py): Streamlit dashboard and inference logic.
-- [notebooks/SmartCartClustering.ipynb](notebooks/SmartCartClustering.ipynb): model training, feature engineering, and artifact export.
-- [models/](models/): serialized scaler, encoder, PCA, and clustering model.
-- [data/smartcart_customers.csv](data/smartcart_customers.csv): sample dataset for testing.
-- [requirements.txt](requirements.txt): pinned Python dependencies.
+- [notebooks/SmartCartClustering.ipynb](notebooks/SmartCartClustering.ipynb): model training, feature engineering, and artifact export
+- [models/](models/): serialized scaler, encoder, PCA, and clustering model
+- [data/smartcart_customers.csv](data/smartcart_customers.csv): sample dataset for testing
+- [requirements.txt](requirements.txt): pinned Python dependencies
 
 ## 🛠️ Local setup
 
-1. Create a virtual environment.
+1. Create a virtual environment
 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
 ```
 
-2. Install dependencies.
+2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Start the app.
+3. Start the app
 
 ```bash
 streamlit run app.py
